@@ -22,14 +22,9 @@ class TestOrder:
         assert order_page.is_order_successful()
 
         order_page.click_look_order_button()
+        order_page.open_yandex_and_switch(DZEN_URL)
 
-        current_handles = driver.window_handles
-        order_page.click_yandex_logo()
-        WebDriverWait(driver, 10).until(lambda d: len(d.window_handles) > len(current_handles))
-        new_window = [h for h in driver.window_handles if h not in current_handles][0]
-        driver.switch_to.window(new_window)
-        WebDriverWait(driver, 10).until(lambda d: DZEN_URL in d.current_url)
-        assert DZEN_URL in driver.current_url
+        assert DZEN_URL in order_page.current_url
 
         driver.close()
         driver.switch_to.window(driver.window_handles[0])

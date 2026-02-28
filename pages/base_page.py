@@ -53,3 +53,15 @@ class BasePage:
     @allure.step("Клик по элементу: {locator}")
     def click_element(self, locator):
         self.wait_for_clickable(locator).click()
+
+    @allure.step("Переключиться на новую вкладку")
+    def switch_to_new_window(self, timeout=10):
+        current_handles = self.driver.window_handles
+        WebDriverWait(self.driver, timeout).until(lambda d: len(d.window_handles) > len(current_handles))
+        new_window = [h for h in self.driver.window_handles if h not in current_handles][0]
+        self.driver.switch_to.window(new_window)
+
+
+    @allure.step("Ожидать URL: {expected_url}")
+    def wait_for_url(self, expected_url, timeout=10):
+        WebDriverWait(self.driver, timeout).until(lambda d: expected_url in d.current_url)
