@@ -16,4 +16,4 @@ class TestMainPage:
         main_page.open()
         main_page.click_order_button(button_locator)
 
-        assert ORDER_URL in driver.current_url
+        assert ORDER_URL in main_page.url
