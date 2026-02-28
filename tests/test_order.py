@@ -21,14 +21,18 @@ class TestOrder:
 
         assert order_page.is_order_successful()
 
-        order_page.click_look_order_button()
+    def test_yandex_loge(self, driver):
+        order_page = OrderPage(driver)
+        order_page.open()
+    
         order_page.open_yandex_and_switch(DZEN_URL)
 
-        assert DZEN_URL in order_page.current_url
+        assert DZEN_URL in order_page.url
 
-        driver.close()
-        driver.switch_to.window(driver.window_handles[0])
+    def test_scooter_logo(self, driver):
+        order_page = OrderPage(driver)
+        order_page.open()
 
         order_page.click_scooter_logo()
-        assert BASE_URL in driver.current_url
+        assert BASE_URL in order_page.url
         

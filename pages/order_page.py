@@ -81,6 +81,9 @@ class OrderPage(BasePage):
     def click_scooter_logo(self):
         self.click_on_element(OrderPageLocators.SCOOTER_LOGO)
 
-    @allure.step("Клик по логотипу Яндекса")
-    def click_yandex_logo(self):
+
+    @allure.step("Открыть логотип Яндекса и проверить переход")
+    def open_yandex_and_switch(self, expected_url):
         self.click_on_element(OrderPageLocators.YANDEX_LOGO)
+        self.switch_to_new_window()
+        self.wait_for_url(expected_url)

@@ -56,10 +56,8 @@ class BasePage:
 
     @allure.step("Переключиться на новую вкладку")
     def switch_to_new_window(self, timeout=10):
-        current_handles = self.driver.window_handles
-        WebDriverWait(self.driver, timeout).until(lambda d: len(d.window_handles) > len(current_handles))
-        new_window = [h for h in self.driver.window_handles if h not in current_handles][0]
-        self.driver.switch_to.window(new_window)
+        WebDriverWait(self.driver, timeout).until(lambda d: len(d.window_handles) > 1)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
 
 
     @allure.step("Ожидать URL: {expected_url}")
