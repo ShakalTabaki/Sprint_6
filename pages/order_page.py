@@ -37,8 +37,7 @@ class OrderPage(BasePage):
             OrderPageLocators.METRO_OPTION[0],
             OrderPageLocators.METRO_OPTION[1].format(station_name)
         )
-        option = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(metro_option_locator))
-        option.click()
+        self.click_element(metro_option_locator)
 
     @allure.step("Выбрать срок аренды")
     def choose_rent_period(self, period):

@@ -44,3 +44,12 @@ class BasePage:
         element = self.wait_for_element(locator, timeout)
         element.clear() 
         element.send_keys(text)
+
+    @allure.step("Ожидание кликабельности элемента: {locator}")
+    def wait_for_clickable(self, locator, timeout=5):
+        return WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+
+
+    @allure.step("Клик по элементу: {locator}")
+    def click_element(self, locator):
+        self.wait_for_clickable(locator).click()
